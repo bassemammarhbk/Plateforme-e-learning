@@ -13,13 +13,12 @@ const sousFilieresRouter = require('./routes/sousfiliere.route')
 const newsletterRouter = require('./routes/newsletter.route');
 const contactRouter = require('./routes/contact.route');
 const app = express()
+const path = require('path');
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 dotenv.config()
 app.use(cors())
-app.get('/',(req,res)=>{
-    res.send('Bienvenue sur notre site')
-})
+
 // connexion base de donnée
 
 mongoose.connect(process.env.DATABASECLOUD)
@@ -37,6 +36,10 @@ app.use('/api/forum', forumRouter);
 app.use('/api/sous-filieres', sousFilieresRouter)
 app.use("/api/newsletter", newsletterRouter);
 app.use('/api/contact', contactRouter);
+
+
+app.use(express.static(path.join(__dirname, './client/build'))); // Route pour
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname,'./client/build/index.html')); });
 
 app.listen(4000,()=>{
     console.log(`Serveur is listen on port ${process.env.PORT}`)
