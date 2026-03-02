@@ -74,7 +74,7 @@ router.post('/register', async (req, res) => {
         }
 
         // Lien d’activation sécurisé par token
-        const activationLink = `http://${req.headers.host}/api/users/status/edit?token=${token}`;
+        const activationLink = `${process.env.FRONTEND_URL}/activate/${token}`;
 
         // Contenu HTML du mail d’activation
         const html = `
@@ -519,7 +519,7 @@ router.post('/forgot-password', async (req, res) => {
   await user.save();
 
   // Préparer l’email
-  const resetLink = `http://${req.headers.host}/api/users/reset-password/${token}`;
+  const resetLink = `${process.env.FRONTEND_URL}/reset-password/${token}`;
   const html = `
     <p>Bonjour ${user.firstname},</p>
     <p>Vous avez demandé à réinitialiser votre mot de passe. Cliquez sur le lien ci‑dessous :</p>
