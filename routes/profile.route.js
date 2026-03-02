@@ -3,7 +3,7 @@ const router = express.Router();
 const { verifyToken } = require('../middlwares/verifToken');
 const User = require('../models/user');
 
-router.get('/profile', verifyToken, async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
     const userprofile = await User.findOne({ _id: req.user.id }, '-password');
     if (!userprofile) {
@@ -15,7 +15,7 @@ router.get('/profile', verifyToken, async (req, res) => {
   }
 });
 
-router.put('/profile/:userId', verifyToken, async (req, res) => {
+router.put('/:userId', verifyToken, async (req, res) => {
     try {
 
         // Mettre à jour l'utilisateur avec l'ID dans l'URL
