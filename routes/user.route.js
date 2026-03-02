@@ -15,10 +15,8 @@ const crypto = require('crypto');
 
 
 // Nodemailer setup
-var transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -52,7 +50,7 @@ router.post('/register', async (req, res) => {
             role,
             tel,
             sexe,
-            isActive: false,
+            isActive: true,
             activationToken: token,
             activationTokenExpires: expiration
         });
