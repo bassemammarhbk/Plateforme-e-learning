@@ -21,7 +21,7 @@ app.use(cors())
 
 // connexion base de donnée
 
-mongoose.connect(process.env.DATABASECLOUD)
+mongoose.connect(process.env.DATABASE)
 .then(()=>{console.log("connexion reussie" )})
 .catch(()=>{console.log("Impossibl",error) ;
     process.exit()
