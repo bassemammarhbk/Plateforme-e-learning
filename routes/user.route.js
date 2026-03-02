@@ -27,13 +27,7 @@ var transporter = nodemailer.createTransport({
         rejectUnauthorized: false
     }
 });
-transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        console.error('❌ Erreur email:', JSON.stringify(error)); // ← log complet
-    } else {
-        console.log('✅ Email envoyé à :', newUser.email);
-    }
-});
+
 
 // Register
 // Register route
@@ -126,12 +120,12 @@ router.post('/register', async (req, res) => {
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Erreur lors de l’envoi de l’email :', error);
-            } else {
-                console.log('Email envoyé à :', newUser.email);
-            }
-        });
+    if (error) {
+        console.error('❌ Erreur email:', JSON.stringify(error)); // ← log complet
+    } else {
+        console.log('✅ Email envoyé à :', newUser.email);
+    }
+});
 
         return res.status(201).send({
             success: true,
