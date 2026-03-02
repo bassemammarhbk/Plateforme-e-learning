@@ -16,10 +16,15 @@ const crypto = require('crypto');
 
 // Nodemailer setup
 var transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
@@ -292,7 +297,7 @@ router.get('/status/edit', async (req, res) => {
             <div class="container">
               <h1>Compte activé avec succès ! 🎉</h1>
               <p>Merci, ${user.firstname}, votre compte est maintenant actif.</p>
-              <a href="http://localhost:3000/login">Se connecter</a>
+              <a href="${process.env.FRONTEND_URL}/login">Se connecter</a>
             </div>
           </body>
           </html>
