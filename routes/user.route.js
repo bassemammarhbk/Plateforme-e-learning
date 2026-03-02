@@ -27,6 +27,13 @@ var transporter = nodemailer.createTransport({
         rejectUnauthorized: false
     }
 });
+transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+        console.error('❌ Erreur email:', JSON.stringify(error)); // ← log complet
+    } else {
+        console.log('✅ Email envoyé à :', newUser.email);
+    }
+});
 
 // Register
 // Register route
